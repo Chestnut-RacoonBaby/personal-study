@@ -8,7 +8,7 @@ import java.util.concurrent.*;
  * @author: qiaohaojie
  * @date: 2024-11-18 20:51:24
  */
-public class Task1 {
+public class ThreadMethodsTask {
 
     /**
      * 继承Thread类，此类是Runnable的实现类：Thread implements Runnable
