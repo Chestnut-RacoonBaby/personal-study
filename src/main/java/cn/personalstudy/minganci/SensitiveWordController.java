@@ -34,6 +34,11 @@ public class SensitiveWordController {
     public ResponseEntity<String> addSensitiveWord(@RequestBody String word) {
         try {
             // 添加到Redis
+            if (stringRedisTemplate.hasKey("sensitive_words")) {
+                log.info("Key 'sensitive_words' already exists, deleting it.");
+                stringRedisTemplate.delete("sensitive_words");
+            }
+            log.info("Adding sensitive word: {}", word);
             stringRedisTemplate.opsForSet().add("sensitive_words", word);
             // 添加到过滤器
             sensitiveWordFilter.addWordToMap(word);
