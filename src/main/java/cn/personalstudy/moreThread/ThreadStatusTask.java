@@ -9,6 +9,14 @@ package cn.personalstudy.moreThread;
 public class ThreadStatusTask {
 
     public static void main(String[] args) {
+        // BLOCKED与RUNNABLE状态的转换
+        blockAndRunnable();
+    }
+
+    /**
+     * BLOCKED与RUNNABLE状态的转换
+     */
+    private static void blockAndRunnable() {
         Thread a = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -31,12 +39,16 @@ public class ThreadStatusTask {
 
         /*
          * 调用start()方法将线程转换为RUNNABLE状态，CPU执行效率高的话，还未等到两个线程真正开始争夺锁，就已经打印出状态了，此时的状态为：
-         * a:RUNNABLE
-         * b:RUNNABLE
+         * a:RUNNABLE RUNNABLE(a.start())
+         * b:RUNNABLE RUNNABLE(b.start())
          *
-         * CPU执行效率不高，线程a抢到了锁，线程b进入阻塞状态：
-         * a:RUNNABLE
-         * b:BLOCKED
+         * CPU执行效率不高，线程a抢到了锁，线程b进入阻塞状态，此时的状态为：
+         * a:RUNNABLE RUNNABLE(a.start())
+         * b:BLOCKED  RUNNABLE(b.start()) -> BLOCKED(未抢到锁)
+         *
+         * 线程a超时等待，线程b进入阻塞状态，此时的状态为：
+         * a:TIMED_WAITING RUNNABLE(a.start()) -> TIMED_WAITING(Thread.sleep()) -> RUNNABLE(sleep()时间到) -> BLOCKED(未抢到锁) -> TERMINATED
+         * b:BLOCKED RUNNABLE(b.start()) -> BLOCKED(未抢到锁) -> TERMINATED
          */
     }
 
