@@ -10,13 +10,15 @@ public class ThreadStatusTask {
 
     public static void main(String[] args) {
         // BLOCKED与RUNNABLE状态的转换
-//        blockAndRunnable();
+        blockAndRunnable();
         // WAITING与RUNNABLE状态的转换 - Object.wait()
-//        waitingAndRunnableWithObject();
+        waitingAndRunnableWithObject();
         // WAITING与RUNNABLE状态的转换 - Thread.join()
-//        waitingAndRunnableWithJoin();
+        waitingAndRunnableWithJoin();
         // TIMED_WAITING与RUNNABLE状态的转换
         timedWaitingAndRunnableWithJoin();
+        // 线程中断
+        terminated();
     }
 
     /**
@@ -200,5 +202,20 @@ public class ThreadStatusTask {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void terminated() {
+        /*
+         * 在某些情况下，我们在线程启动后发现并不需要它继续执行下去时，需要中断线程。目前在 Java 里还没有安全方法来直接停止线程，但是 Java 提供了线程中断机制来处理需要中断线程的情况。
+         *
+         * 线程中断机制是一种协作机制。需要注意，通过中断操作并不能直接终止一个线程，而是通知需要被中断的线程自行处理。
+         *
+         * 简单介绍下 Thread 类里提供的关于线程中断的几个方法：
+         * Thread.interrupt()：中断线程。这里的中断线程并不会立即停止线程，而是设置线程的中断状态为 true（默认是 false）；
+         * Thread.isInterrupted()：测试当前线程是否被中断；
+         * Thread.interrupted()：检测当前线程是否被中断，与 isInterrupted() 方法不同的是，这个方法如果发现当前线程被中断，会清除线程的中断状态。
+         *
+         * 在线程中断机制里，当其他线程通知需要被中断的线程后，线程中断的状态被设置为 true，但是具体被要求中断的线程要怎么处理，完全由被中断线程自己决定，可以在合适的时机中断请求，也可以完全不处理继续执行下去。
+         */
     }
 }
