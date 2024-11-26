@@ -14,7 +14,9 @@ public class ThreadStatusTask {
         // WAITING与RUNNABLE状态的转换 - Object.wait()
 //        waitingAndRunnableWithObject();
         // WAITING与RUNNABLE状态的转换 - Thread.join()
-        waitingAndRunnableWithJoin();
+//        waitingAndRunnableWithJoin();
+        // TIMED_WAITING与RUNNABLE状态的转换
+        timedWaitingAndRunnableWithJoin();
     }
 
     /**
@@ -156,6 +158,44 @@ public class ThreadStatusTask {
             /*
              * a:TERMINATED  线程启动之后立马调用了join()方法，main线程会等到a线程执行完毕，所以状态为TERMINATED
              * b:TIMED_WAITING/RUNNABLE(b.start()) 这里可能是RUNNABLE(尚未进入同步方法)，也可能是TIMED_WAITING(进入了同步方法等待锁)
+             */
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * ③ TIMED_WAITING与RUNNABLE状态的转换
+     * Thread.sleep(long)：使当前线程睡眠指定时间。这里的睡眠指的是暂时使线程停止执行，并不会释放锁，时间到后，重新进入RUNNABLE状态。
+     * Object.wait(long)：使当前线程等待指定时间，时间到后会自动唤醒，拥有去争夺锁的资格。
+     * Thread.join(long)：使当前线程等待指定时间，并且使线程进入TIMED_WAITING状态。
+     */
+    private static void timedWaitingAndRunnableWithJoin() {
+        try {
+            Thread a = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    testMethod();
+                }
+            }, "a");
+
+            Thread b = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    testMethod();
+                }
+            }, "b");
+
+            a.start();
+            a.join(1000L);
+            b.start();
+
+            System.out.println(a.getName() + ":" + a.getState()); // 输出？
+            System.out.println(b.getName() + ":" + b.getState()); // 输出？
+
+            /*
+             * a:TIMED_WAITING
+             * b:BLOCKED/RUNNABLE
              */
         } catch (Exception e) {
             e.printStackTrace();
