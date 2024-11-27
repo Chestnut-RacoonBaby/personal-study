@@ -68,6 +68,9 @@ public class ThreadLockTask {
         threadB.start();
     }
 
+    /**
+     * 等待/通知机制
+     */
     private static void waitAndNotify() {
         Object lock = new Object();
         Thread threadA = new Thread(() -> {
