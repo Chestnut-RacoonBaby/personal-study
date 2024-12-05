@@ -9,6 +9,7 @@ Java运行时内存区域描述的是在JVM运行时，如何将内存划分为�
 - 本地方法栈：存储JNI(Java Native Interface)方法调用的参数、返回值等。管理本地方法的调用。
 - 程序计数器：存储当前线程正在执行的字节码地址。
 
+![](pictures/f880692d.png)
 
 ### 二、Java的内存模型（JMM）
 Java内存模型（Java Memory Model，JMM）是一组规则，定义了Java程序中的变量、线程如何和主内存以及工作内存进行交互。
