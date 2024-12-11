@@ -44,8 +44,9 @@ public class StackTest {
                     operandStack.push(applyOperator(operatorStack.pop(), operandStack.pop(), operandStack.pop()));
                 }
                 operatorStack.pop(); // 弹出左括号
-            }// 判断是否为运算符
-             else if (isOperator(ch)) {
+            }
+            // 判断是否为运算符
+            else if (isOperator(ch)) {
                 // operatorStack.peek() 查看栈顶元素
                 while (!operatorStack.isEmpty() && precedence(operatorStack.peek()) >= precedence(ch)) {
                     operandStack.push(applyOperator(operatorStack.pop(), operandStack.pop(), operandStack.pop()));
@@ -65,6 +66,12 @@ public class StackTest {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/';
     }
 
+    /**
+     * 这个方法用来判断执行的优先级
+     *
+     * @param op op操作符
+     * @return
+     */
     private static int precedence(char op) {
         switch (op) {
             case '+':
