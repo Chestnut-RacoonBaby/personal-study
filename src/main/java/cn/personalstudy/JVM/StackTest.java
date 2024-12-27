@@ -14,6 +14,8 @@ public class StackTest {
         String expression = "2 + 5 / 3 * (6 - 2)";
         double result = evaluate(expression);
         System.out.println("Result: " + result);
+        // 获取当前JVM的堆内存大小
+        System.out.println(Runtime.getRuntime().maxMemory() / 1024.0 / 1024 + "MB");
     }
 
 
