@@ -248,3 +248,12 @@ JDK1.2之后，Java对引用的概念进行了扩充，将引用分为强引用�
 
 # 七、垃圾收集器
 
+1. Serial收集器
+2. ParNew收集器
+3. ParallelScavenge收集器
+4. Serial Old收集器
+5. Parallel Old收集器
+6. CMS收集器
+7. G1收集器
+8. ZGC收集器
+
