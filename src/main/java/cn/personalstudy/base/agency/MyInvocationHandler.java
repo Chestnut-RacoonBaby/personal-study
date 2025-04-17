@@ -18,6 +18,12 @@ public class MyInvocationHandler implements InvocationHandler {
         this.target = target;
     }
 
+    /**
+     * 代理类的逻辑就是把所有接口方法的调用转发到切面类的invoke()方法上，然后根据反射调用目标类的方法。
+     *
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("Before method call...");
@@ -28,6 +34,9 @@ public class MyInvocationHandler implements InvocationHandler {
 
     /**
      * 使用动态代理
+     * ① 首先通过实现InvocationHandler接口得到一个切面类
+     * ② 然后利用Proxy根据目标类的类加载器、接口和切面类得到一个代理类
+     * ③ 代理类的逻辑就是把所有接口方法的调用转发到切面类的invoke()方法上，然后根据反射调用目标类的方法
      *
      * @param args
      */
