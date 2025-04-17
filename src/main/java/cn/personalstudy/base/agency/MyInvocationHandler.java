@@ -12,6 +12,7 @@ import java.lang.reflect.Proxy;
  */
 public class MyInvocationHandler implements InvocationHandler {
 
+    // 要代理的目标对象
     private final Object target;
 
     public MyInvocationHandler(Object target) {
@@ -42,6 +43,7 @@ public class MyInvocationHandler implements InvocationHandler {
      */
     public static void main(String[] args) {
         MyService target = new MyServiceImpl();
+        // 得到代理类，只有运行后才会生成这个代理类
         MyService proxy = (MyService) Proxy.newProxyInstance(
                 target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
