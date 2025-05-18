@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * 上界限定符
+ * ? extends T 表示通配符类型必须是T类型或T的子类
  *
  * @author: qiaohaojie
  * @date: 2025-05-18 15:52:53
