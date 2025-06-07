@@ -29,7 +29,7 @@ public class TCPServer {
     public static void main(String[] args) {
         // 服务端创建ServerSocket监听端口8888
         try (ServerSocket serverSocket = new ServerSocket(8888)) {
-            System.out.println("服务器启动成功");
+            System.out.println("服务器启动成功！");
 
             while (true) {
                 // 阻塞等待客户端连接
